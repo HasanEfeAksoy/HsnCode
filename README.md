@@ -22,7 +22,9 @@ or download as zip.
 <br>
 <p>$${\color{green}-}$$ Changable explorer visibility</p>
 <br>
-<p>$${\color{green}-}$$ Code support for parentheses and brackets. Also (Windows) help for begining Ctrl+Space for C++, Ctrl+Shift+1 for HTML.</p>
+<p>$${\color{green}-}$$ Code support for parentheses and brackets</p>
+<br>
+<p>$${\color{green}-}$$ (Windows) help for begining Ctrl+Space for C++, Ctrl+Shift+1 for HTML</p>
 
 <br>
 <br>
