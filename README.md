@@ -1,7 +1,7 @@
 #HsnCode
 
 <br>
-<h3>HsnCode is simple text editor. Only dependency is electron.js.</h3>
+<h3>HsnCode is simple text editor. [electron.js, fs]</h3>
 <br>
 <br>
 Download: <pre>git clone https://github.com/HasanEfeAksoy/HsnCode.git</pre>
