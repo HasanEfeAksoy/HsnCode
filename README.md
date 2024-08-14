@@ -21,6 +21,8 @@ or download as zip.
 <p>$${\color{green}-}$$ File, Edit, View, About tabs</p>
 <br>
 <p>$${\color{green}-}$$ Changable explorer visibility</p>
+<br>
+<p>$${\color{green}-}$$ Code support for parentheses and brackets. Also (Windows) help for begining Ctrl+Space for C++, Ctrl+Shift+1 for HTML.</p>
 
 <br>
 <br>
@@ -38,3 +40,14 @@ or download as zip.
 <p>$${\color{red}-}$$ If you delete the existing folder in other browsers, no error occurs</p>
 <br>
 <p>$${\color{red}-}$$ If you use too many lines it may lag</p>
+
+<br>
+<br>
+<br>
+<h3>Screenshots</h3>
+<br>
+<img src="./hsncode0.png">
+<br>
+<img src="./hsncode1.png">
+<br>
+<img src="./hsncode2.png">
