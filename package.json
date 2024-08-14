@@ -1,0 +1,14 @@
+{
+  "name": "hsn_code",
+  "version": "1.0.0",
+  "description": "Text Editor",
+  "main": "app.js",
+  "scripts": {
+    "start" : "electron ."
+  },
+  "author": "Hasan Efe AKSOY",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^31.3.1"
+  }
+}

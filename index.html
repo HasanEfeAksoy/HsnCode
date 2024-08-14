@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HsnCode</title>
+    <style>
+        /* #0048ff ->blue */
+        /* #00ffa6 ->green */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Consolas, 'Courier New', monospace;
+            font-size: 13.33px;
+            overflow: hidden;
+        }
+        button {
+            font-family: Consolas, 'Courier New', monospace;
+            font-size: 13.33px;    
+        }
+
+        .title-bar {
+            position: fixed;
+            width: 100%;
+            height: 35px;
+            z-index: 1000;
+            background-color: #202020;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
+            -webkit-app-region: drag;
+            border-bottom: 0.01px solid #9696962c;
+            user-select: none;
+        }
+        .title-bar-buttons {
+            margin: 0px;
+            padding: 0px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .title-bar-button {
+            color: #a8a8a8c7;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 35px;
+            height: 35px;
+            margin: 0px;
+            padding: 0px 23px;
+            background: none;
+            border: none;
+            -webkit-app-region: no-drag;
+            transition: background-color 170ms ease;
+        }
+        .title-bar-button img {
+            margin: 0px;
+            padding: 0px;
+            height: 20px;
+            width: 20px;
+            transition: filter 170ms ease;
+            filter: brightness(0) saturate(100%) invert(1);
+        }
+        .title-bar-button:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+        .title-bar-button#close:hover {
+            background-color: rgba(255, 0, 0, 0.5);
+        }
+        .title-bar-button#close:hover img {
+            filter: brightness(0.5) saturate(100%);
+        }
+
+
+        .title-bar-left {
+            margin: 0px;
+            padding: 0px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .title-bar-buttons-left {
+            margin: 0px;
+            padding: 0px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .title-bar-button-left {
+            color: #a8a8a8c7;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 35px;
+            height: 35px;
+            margin: 0px;
+            padding: 0px 23px;
+            background: none;
+            border: none;
+            -webkit-app-region: no-drag;
+            transition: background-color 170ms ease;
+        }
+        .title-bar-left .title-bar-icon {
+            margin: 0px;
+            padding: 0px;
+            width: 20px;
+            height: 20px;
+        }
+        .title-bar-left .title-bar-icon {
+            margin: 0px;
+            padding: 0px;
+            width: 35px;
+            height: 35px;
+        }
+        .title-bar-left .title-bar-buttons-left {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            align-items: center;
+        }
+        .title-bar-left .title-bar-buttons-left button {
+            height: 25px;
+            margin: 5px 0px 5px 8px;
+            padding: 0px 20px;
+            border-radius: 5px;
+            transition: background-color 100ms ease;
+        }
+        .title-bar-button-left:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+
+
+        .menu-left {
+            display: none;
+            position: absolute;
+            background-color: #202020;
+            border: 1px solid #9696968a;
+            z-index: 1001;
+            margin-top: 30px;
+            border-radius: 3px;
+            user-select: none;
+            box-shadow:  0px 0px 8px 1px rgba(0, 0, 0, 0.37);
+        }
+        .menu-left-item {
+            padding: 10px;
+            color: #ffffffc7;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .menu-left-item:hover {
+            background-color: #00ffa6;
+            color: #000000c7;
+        }
+
+
+        /* 
+            end top bar
+        */
+
+
+        .menu-tab-left {
+            position: fixed;
+            top: 35px;
+            left: 0;
+            height: calc(100% - 35px);
+            background-color: #202020;
+            border: 1px solid #9696962c;
+            color: #a8a8a8;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .menu-tab-left-resize-handle {
+            width: 2px;
+            background-color: #9696962c;
+            cursor: ew-resize;
+            height: 100%;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 300ms ease;
+        }
+        .menu-tab-left-resize-handle:hover {
+            background-color: #00ffa6;
+        }
+
+
+        .menu-tab-left-explorer {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .menu-tab-left-explorer-head {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;    
+        }
+
+        
+        #file-tree {
+            width: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            white-space: nowrap;
+            font-size: 11px;
+        }
+        /* Webkit tabanlı tarayıcılar için kaydırma çubuğu stilleri */
+        #file-tree::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        /* Kaydırma çubuğunun arka planı */
+        #file-tree::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Kaydırma çubuğu için "thumb" (kaydırma kısmı) */
+        #file-tree::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        /* Kaydırma kısmı üzerine gelindiğinde */
+        #file-tree::-webkit-scrollbar-thumb:hover {
+            background: #555;
+            cursor: default;
+        }
+
+
+
+
+
+        /* EXPLORER */
+        .file-tree-item {
+            padding: 5px 0px 5px 5px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .file-tree-item:hover {
+            background-color: #00ffa611;
+        }
+
+        .sub-tree {
+            padding-left: 20px;
+        }
+
+        .folder-icon {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            text-align: center;
+            margin-right: 5px;
+            font-size: 15px;
+            vertical-align: middle;
+        }
+        /* EXPLORER */
+
+
+        
+
+
+        .text-area-container {
+            position: fixed;
+            top: 35px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            z-index: 998;
+        }
+        .text-area-container .codeArea {
+            resize: none;
+            margin: 0px;
+            padding: 0px;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-style: none;
+            outline-style: none;
+            background-color: #343434;
+            background: #343434;
+            color: #fff;
+            overflow: auto;
+            white-space: nowrap;
+            font-family: Consolas, 'Courier New', monospace;
+            font-size: 13.33px;
+        }
+        
+        /* Webkit tabanlı tarayıcılar için kaydırma çubuğu stilleri */
+        .text-area-container .codeArea::-webkit-scrollbar {
+            width: 13.33px;
+            height: 13.33px;
+        }
+
+        /* Kaydırma çubuğunun arka planı */
+        .text-area-container .codeArea::-webkit-scrollbar-track {
+            background: #ffffff00;
+        }
+
+        /* Kaydırma çubuğu için "thumb" (kaydırma kısmı) */
+        .text-area-container .codeArea::-webkit-scrollbar-thumb {
+            background: #8f8f8fa7;
+        }
+
+        /* Kaydırma kısmı üzerine gelindiğinde */
+        .text-area-container .codeArea::-webkit-scrollbar-thumb:hover {
+            background: #8f8f8f;
+            cursor: default;
+        }
+        .text-area-container .codeArea::-moz-selection {
+            background: #00ffa630;
+        }
+        .text-area-container .codeArea::selection {
+            background: #00ffa630;
+        }
+        
+
+        .text-area-container .codeAreaLines {
+            width: auto;
+            height: 100%;
+            margin-bottom: 0px;
+            background-color: #343434;
+            color: #ffffff94;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: end;
+            text-align: right;
+            overflow: hidden;
+        }
+
+        .text-area-container .codeAreaLines span {
+            margin: 0px 6px 0px 4px;
+            padding: 0px;
+            font-family: Consolas, 'Courier New', monospace;
+            font-size: 13.33px;
+        }
+
+
+
+
+
+    </style>
+</head>
+<body>
+    <div class="title-bar">
+        <div class="title-bar-left">
+            <img class="title-bar-icon" src="images/hsncodelogo.png" draggable="false"/>
+            <div class="title-bar-buttons-left">
+                <button class="title-bar-button-left" id="file">File</button>
+                <button class="title-bar-button-left" id="edit">Edit</button>
+                <button class="title-bar-button-left" id="view">View</button>
+                <button class="title-bar-button-left" id="help">Help</button>
+            </div>
+        </div>
+        <div class="title-bar-buttons">
+            <button class="title-bar-button" id="minimize">
+                <img src="images/minimize.png" draggable="false"/>
+            </button>
+            <button class="title-bar-button" id="maximize">
+                <img src="images/maximize.png" draggable="false"/>
+            </button>
+            <button class="title-bar-button" id="close">
+                <img src="images/close.png" draggable="false"/>
+            </button>
+        </div>
+    </div>
+
+    <!-- her karakter 48px  -->
+    <div class="menu-left" id="file-menu" style="left: 43px;">
+        <div class="menu-left-item" onclick="file_newfile()">New File</div>
+        <div class="menu-left-item" onclick="file_openfile()">Open File</div>
+        <div class="menu-left-item" onclick="file_openfolder()">Open Folder</div>
+        <div class="menu-left-item" onclick="file_save()">Save</div>
+        <div class="menu-left-item" onclick="file_saveas()">Save As</div>
+        <div class="menu-left-item" onclick="file_closefolder()">Close Folder</div>
+        <div class="menu-left-item" onclick="file_closewindow()">Close Window</div>
+    </div>
+    <div class="menu-left" id="edit-menu" style="left: 91px;">
+        <div class="menu-left-item" onclick="edit_undo()">Undo</div>
+        <div class="menu-left-item" onclick="edit_redo()">Redo</div>
+        <div class="menu-left-item" onclick="edit_cut()">Cut</div>
+        <div class="menu-left-item" onclick="edit_copy()">Copy</div>
+        <div class="menu-left-item" onclick="edit_paste()">Paste</div>
+    </div>
+    <div class="menu-left" id="view-menu" style="left: 139px;">
+        <div class="menu-left-item" onclick="view_reloadexplorer()">Reload Explorer</div>
+        <div class="menu-left-item" onclick="view_changeexplorertabstate()">Change Explorer Tab State</div>
+        <div class="menu-left-item" onclick="view_changecodecolor()">Set Code Color to Selected Color</div>
+        <input type="color" id="codeColorInput" value="#ffffff" style="width: calc(100% - 20px); border: none; cursor: pointer; margin: 10px;">
+    </div>
+    <div class="menu-left" id="help-menu" style="left: 187px;">
+        <div class="menu-left-item" onclick="help_about()">About</div>
+        <div class="menu-left-item" onclick="help_documentation()">Documentation</div>
+    </div>
+
+
+
+    <div class="menu-tab-left">
+        <div class="menu-tab-left-resize-handle" style="user-select: none;"></div>
+        <div class="menu-tab-left-explorer">
+            <div class="menu-tab-left-explorer-head">
+                <h5 style="user-select: none; border-bottom: 0.01px solid #9696962c; width: 100%; margin: 0px; padding: 8px 0px; white-space: nowrap; overflow: hidden; font-size: 14px;" id="explorer+-selected-path">EXPLORER</h5>
+            </div>
+            <div id="file-tree">
+                <!-- Dosya ve klasörler buraya eklenecek -->
+            </div>
+        </div>
+        <h4 id="isSaved" style="margin: 10px 0px 2px 0px; width: 100%; text-align: center; user-select: none; border-top: 0.01px solid #00ffa6a9;"></h4>
+        <h4 id="currentFile" style="text-align: center; margin: 0px; width: 100%; color: #fff; font-size: 11px; user-select: none; white-space: nowrap; overflow: hidden;">no selected file</h4>
+    </div>
+
+
+
+    <div class="text-area-container" id="text-area-container">
+        <div class="codeAreaLines" id="codeAreaLines" style="user-select: none;"></div>
+        <textarea class="codeArea" id="codeArea" spellcheck="false"></textarea>
+    </div>
+
+
+    
+
+
+    <script src="index.js"></script>
+</body>
+</html>
