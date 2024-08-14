@@ -53,3 +53,5 @@ or download as zip.
 <img src="./hsncode1.png">
 <br>
 <img src="./hsncode2.png">
+<br>
+<img src="./hsncode3.png">
