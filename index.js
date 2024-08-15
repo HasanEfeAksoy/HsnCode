@@ -187,7 +187,7 @@ codeArea.addEventListener('keydown', (e) => {
         codeArea.value = codeArea.value.substring(0, start) + tabCharacter + codeArea.value.substring(end);
         codeArea.selectionStart = codeArea.selectionEnd = start + tabCharacter.length;
     }
-    else if ((e.key == "S" || e.key == "s") && e.ctrlKey) {
+    else if ((e.key == "S" || e.key == "s") && (e.ctrlKey || e.metaKey)) {
         if (currentFolderPath == '' || currentEditingName == '' || selectedFileParentPath == '') {
             file_saveas();
         }
@@ -195,24 +195,24 @@ codeArea.addEventListener('keydown', (e) => {
             file_save();
         }
     }
-    else if ((e.key == "Z" || e.key == "z") && e.ctrlKey) {
+    else if ((e.key == "Z" || e.key == "z") && (e.ctrlKey || e.metaKey)) {
         e.preventDefault();
         edit_undo();
 
     }
-    else if ((e.key == "Y" || e.key == "y") && e.ctrlKey) {
+    else if ((e.key == "Y" || e.key == "y") && (e.ctrlKey || e.metaKey)) {
         e.preventDefault();
         edit_redo();
     }
-    else if ((e.key == "X" || e.key == "x" && e.ctrlKey)) {
+    else if ((e.key == "X" || e.key == "x" && (e.ctrlKey || e.metaKey))) {
         e.preventDefault();
         edit_cut();
     }
-    else if ((e.key == "C" || e.key == "c" && e.ctrlKey)) {
+    else if ((e.key == "C" || e.key == "c" && (e.ctrlKey || e.metaKey))) {
         e.preventDefault();
         edit_copy();
     }
-    else if ((e.key == "V" || e.key == "v" && e.ctrlKey)) {
+    else if ((e.key == "V" || e.key == "v" && (e.ctrlKey || e.metaKey))) {
         e.preventDefault();
         edit_paste();
     }
@@ -233,11 +233,11 @@ codeArea.addEventListener('keydown', (e) => {
         codeHelper("\'", 1);
     }
 
-    else if (e.ctrlKey && e.key == " ") {
+    else if ((e.ctrlKey || e.metaKey) && e.key == " ") {
         e.preventDefault();
         codeHelper("#include <iostream>\n\nint main() {\n\n    return 0;\n}" , 0);
     }
-    else if (e.ctrlKey && e.key == "!") {
+    else if ((e.ctrlKey || e.metaKey) && e.key == "!") {
         e.preventDefault();
         codeHelper('<!DOCTYPE html>\n<html lang="en">\n    <head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n        <title>Document</title>\n    </head>\n    <body>\n    \n    </body>\n</html>', 0);
     }
