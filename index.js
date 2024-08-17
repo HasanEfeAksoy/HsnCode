@@ -204,15 +204,15 @@ codeArea.addEventListener('keydown', (e) => {
         e.preventDefault();
         edit_redo();
     }
-    else if ((e.key == "X" || e.key == "x" && (e.ctrlKey || e.metaKey))) {
+    else if ((e.key == "X" || e.key == "x") && (e.ctrlKey || e.metaKey)) {
         e.preventDefault();
         edit_cut();
     }
-    else if ((e.key == "C" || e.key == "c" && (e.ctrlKey || e.metaKey))) {
+    else if ((e.key == "C" || e.key == "c") && (e.ctrlKey || e.metaKey)) {
         e.preventDefault();
         edit_copy();
     }
-    else if ((e.key == "V" || e.key == "v" && (e.ctrlKey || e.metaKey))) {
+    else if ((e.key == "V" || e.key == "v") && (e.ctrlKey || e.metaKey)) {
         e.preventDefault();
         edit_paste();
     }
